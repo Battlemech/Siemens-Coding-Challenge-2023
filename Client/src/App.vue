@@ -10,19 +10,19 @@
 </template>
 
 <script setup lang="ts">
-import { counterStore } from './stores/counter';
+import { counterStore } from './stores/counter'
 const counter = counterStore()
 </script>
 
 <style>
-.home{
+.home {
   text-align: center;
 }
-.count{
+.count {
   font-size: 60px;
   margin: 20%;
 }
-.button-holder{
+.button-holder {
   font-size: 60px;
   margin: 10%;
 }
