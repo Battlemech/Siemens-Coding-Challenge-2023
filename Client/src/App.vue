@@ -16,6 +16,9 @@ const counter = counterStore()
 </script>
 
 <style>
+.home{
+  text-align: center;
+}
 .count{
   font-size: 60px;
   margin: 20%;

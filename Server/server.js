@@ -19,7 +19,8 @@ server.on('connection', (socket) => {
         //parse data
         const remoteCount = JSON.parse(data).count
         
-        //no global update necessary: Client didn't click before connect
+        //No global update necessary: Client didn't click before connect
+        //Also, handle invalid data
         if(remoteCount == 0 || remoteCount == NaN || remoteCount == undefined) return;
 
         //increment the tracker

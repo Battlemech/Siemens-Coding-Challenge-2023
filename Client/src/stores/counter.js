@@ -5,43 +5,20 @@ const PORT = 8080
 //track amount of times button was clicked
 const count = ref(0)
 
-//define remote increment function
-function remoteIncrement(socket, amount){
-  socket.send(JSON.stringify({count: amount}))
-}
+//setup networking
+const socket = new WebSocket('ws://localhost:'+PORT)
 
-//connect asynchronously to avoid blank ui if server isn't running
-async function setupNetworking() {
-  //setup networking
-  const socket = new WebSocket('ws://localhost:'+PORT)
-
-  socket.addEventListener('message', (messageEvent) => {
-    const data = JSON.parse(messageEvent.data)
-    
-    //increment local reference by value
-    count.value = data.count
-  })
+socket.addEventListener('message', (messageEvent) => {
+  //parse received dict
+  const data = JSON.parse(messageEvent.data)
   
-  socket.addEventListener('open', (connectEvent) => {
-    //inform server of click count before connect
-    remoteIncrement(socket, count.value)
-  })
+  //update local value to remote one
+  count.value = data.count;
+})
 
-  return socket
-}
-
-//allow accessing async task
-const socket = await setupNetworking()
-
+//inform server that value needs to be incremented
 function increment(){
-  //if client isn't connected: Increment value locally, synchronise later
-  if(socket == null) {
-    count.value++
-    return
-  }
-
-  //tell server to increment count by one
-  remoteIncrement(socket, 1)
+  socket.send(JSON.stringify({count: 1}))
 }
 
 export const counterStore = defineStore('counter', () => {
