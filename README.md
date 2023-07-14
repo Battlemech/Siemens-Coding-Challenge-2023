@@ -77,7 +77,7 @@ I've taken the liberty to not precisely implement this requirement for the sake 
 - [x] All users that are on the page should always see the current value.
 - [x] When another user enters the site, the current counter value is shown.
 
-![Requirements4&5 (Only visible on GuitHub)](./Documentation/synchronised_values.mov)
+![Requirements4&5 (Only visible on GuitHub)](./Documentation/synchronised_values.webm)
 
 - [x] The application should store a history of the last 5 timestamps when the counter was increased. However, they must not be shown to the user.
 - [x] Storing data only during runtime is enough.
