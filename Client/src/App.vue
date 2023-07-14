@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { useCounterStore } from "@/stores/counter"
+import { counterStore } from './stores/counter';
 
-const counter = useCounterStore()
+const counter = counterStore()
 </script>
 
 <style>
