@@ -1,11 +1,22 @@
 import { WebSocketServer } from 'ws'
 const PORT = 8080
+const TRACKING_COUNT = 5
+
+//helper function to get timestamp of button increase
+function getTime(){
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return date+' '+time;
+}
 
 //instantiate server
 const server = new WebSocketServer({port: PORT})
 
 //start tracking button click count
 var clickCount = 0
+//save times where buttons were clicked during runtime
+const timestamps = []
 
 //handle incoming connections
 server.on('connection', (socket) => {
@@ -26,7 +37,9 @@ server.on('connection', (socket) => {
         //increment the tracker
         clickCount += remoteCount
 
-        console.log('Client incremented value. Count=' + clickCount)
+        //save history of last transactions
+        timestamps[clickCount % TRACKING_COUNT] = getTime()
+        console.log('Client incremented value. Count=' + clickCount + ". Time: " + timestamps)
 
         //notify all connected sessions of updated clickCount
         server.clients.forEach(client => {
