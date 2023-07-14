@@ -1,6 +1,6 @@
 # Siemens-Energy Lab: Coding Challenge
 
-Coding challenge for recriutment at Siemens in 2023.
+Coding challenge for recruitment at Siemens in 2023.
 
 # Usage
 
